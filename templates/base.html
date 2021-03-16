@@ -2,6 +2,7 @@
 {% url 'cities:create' as cities_create_url %}
 {% url 'trains:home' as trains_home_url %}
 {% url 'trains:create' as trains_create_url %}
+{% url 'list' as route_list_url %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -30,6 +31,9 @@
             <li class="nav-item">
                 <a class="nav-link {% if request.path == trains_home_url %}active{% endif %}" aria-current="page" href="{% url 'trains:home' %}">Поезда</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.path == route_list_url %}active{% endif %}" aria-current="page" href="{% url 'list' %}">Маршруты</a>
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle {% if request.path == cities_create_url or request.path == trains_create_url %}active{% endif %}" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Добавить
@@ -39,6 +43,16 @@
                 <li><a class="dropdown-item" href="{% url 'trains:create'%}">Новый поезд</a></li>
               </ul>
             </li>
+
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'accounts:logout' %}">Выйти</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'accounts:login' %}">Войти</a>
+                </li>
+              {% endif %}
           </ul>
         </div>
       </div>
