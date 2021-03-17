@@ -12,6 +12,7 @@
                 <th>Куда</th>
                 <th>Время в пути</th>
                 <th>Список поезлов по маршруту</th>
+                <th>&nbsp;</th>
             </tr>
 
             <tr>
@@ -26,8 +27,14 @@
                         <p>{{ train }} Время в пути {{ train.travel_time }}</p>
                     {% endfor %}
                 </td>
+                <td>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'delete' pk=object.id %}">
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </a>
+                    {% endif %}&nbsp;
+                </td>
             </tr>
-
         </table>
     </div>
 </div>
